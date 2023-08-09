@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { user } from '@prisma/client'
+import { bcrypt } from "bcrypt";
 
 @Injectable()
 export class AuthService {
@@ -16,14 +17,17 @@ export class AuthService {
         }
 
         // Step 2: Check if the password is correct
-        const isPasswordValid = user.password === password;
+  
 
-        // If password does not match, throw an error
+        const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
             throw new UnauthorizedException('Invalid password');
         }
 
         return user;
     }
+
+
+    
 }
 
