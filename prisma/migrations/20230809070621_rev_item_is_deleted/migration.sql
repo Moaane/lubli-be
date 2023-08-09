@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `item` ADD COLUMN `isDeleted` INTEGER NOT NULL DEFAULT 0;
