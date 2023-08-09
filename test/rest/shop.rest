@@ -1,0 +1,27 @@
+GET http://localhost:3000/shop
+
+###
+GET http://localhost:3000/shop/
+
+###
+POST http://localhost:3000/shop
+Content-Type: application/json
+
+{
+    "shopName": "Ahmad",
+    "address": "12345",
+    "userId": "3ff56721-3bac-49dd-8155-c1d3f847227e"
+}
+
+###
+PUT  http://localhost:3000/shop/3a4f1b3d-15fb-4833-8253-2458754a6c56
+Content-Type: application/json
+
+{
+    "shopName": "PAPAPKUY",
+    "address": "12345",
+    "userId": "3ff56721-3bac-49dd-8155-c1d3f847227e"
+}
+
+###
+DELETE http://localhost:3000/shop/

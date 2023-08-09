@@ -1,0 +1,35 @@
+GET http://localhost:3000/item
+
+###
+GET http://localhost:3000/item/
+
+###
+POST http://localhost:3000/item
+Content-Type: application/json
+
+{
+    "itemName": "Flanel",
+    "description": "ini flanel bagus bagnet",
+    "image": "https://w7.pngwing.com/pngs/699/571/png-transparent-long-sleeved-t-shirt-flannel-dress-shirt-t-shirt-tartan-black-plaid-thumbnail.png",
+    "price": 10.000,
+    "stock": 5,
+    "categoryId": "7143e24d-c7b4-4bdc-9fd8-3e1cb04954fc",
+    "shopId": "3a4f1b3d-15fb-4833-8253-2458754a6c56"
+}
+
+###
+PUT  http://localhost:3000/item/
+Content-Type: application/json
+
+{
+    "itemName": "Electronic",
+    "description": "Electronic",
+    "image": "Electronic",
+    "price": ,
+    "stock": "Electronic",
+    "categoryId": "Electronic",
+    "shopId": "Electronic"
+}
+
+###
+DELETE http://localhost:3000/item/
