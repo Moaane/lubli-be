@@ -10,7 +10,7 @@ export class AuthService {
     async login(userName: string, password: string): Promise<user> {
 
         const user = await this.prismaService.user.findUnique({ where: { userName } });
-        
+
         if (!user) {
             throw new NotFoundException(`No user found for username: ${userName}`);
         }
@@ -34,14 +34,14 @@ export class AuthService {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const newUser = await this.prismaService.user.create({
+        const user = await this.prismaService.user.create({
             data: {
                 userName,
                 password: hashedPassword,
             },
         });
 
-        return newUser;
+        return user;
     }
 
 }

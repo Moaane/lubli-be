@@ -1,0 +1,28 @@
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+{
+    "userName": "Ahmad",
+    "password": "12345"
+}
+
+###
+GET http://localhost:3000/auth/
+
+###
+POST http://localhost:3000/auth
+Content-Type: application/json
+
+{
+    "categoryName": "Electronic"
+}
+
+###
+PUT  http://localhost:3000/auth/
+Content-Type: application/json
+
+{
+    "categoryName": "Fashion"
+}
+
+###
+DELETE http://localhost:3000/auth/

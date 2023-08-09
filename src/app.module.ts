@@ -12,13 +12,8 @@ import { CheckoutModule } from './checkout/checkout.module';
 import { AuthModule } from './auth/auth.module';
 
 @Module({
-<<<<<<< HEAD
-  imports: [PrismaModule, UserModule, ShopModule, CategoryModule, ItemModule, CartModule, CheckoutModule],
-  controllers: [AppController],
-=======
   imports: [PrismaModule, UserModule, ShopModule, CategoryModule, ItemModule, CartModule, CheckoutModule, AuthModule],
-  controllers: [AppController, CardController],
->>>>>>> 484afeb7e8bc81063a9930d163a951cc34e6a797
+  controllers: [AppController],
   providers: [AppService, PrismaService],
 })
 export class AppModule {}
