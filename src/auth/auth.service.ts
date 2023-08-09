@@ -23,7 +23,7 @@ export class AuthService {
             throw new UnauthorizedException('Invalid password');
         }
 
-        return "muhahaha";
+        return user;
     }
 }
 
