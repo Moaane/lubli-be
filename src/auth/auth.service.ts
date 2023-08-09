@@ -7,17 +7,13 @@ import { bcrypt } from "bcrypt";
 export class AuthService {
     constructor(private prismaService: PrismaService) { }
 
-    async login( userName: string, password: string): Promise<user> {
+    async login(userName: string, password: string): Promise<user> {
 
         const user = await this.prismaService.user.findUnique({ where: { userName } });
-
-        // If no user is found, throw an error
+        
         if (!user) {
             throw new NotFoundException(`No user found for username: ${userName}`);
         }
-
-        // Step 2: Check if the password is correct
-  
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
@@ -27,17 +23,26 @@ export class AuthService {
         return user;
     }
 
-    async register( id:string ,data :{
-        userName : string,
-        password : string,
-    } ): Promise<user>{
+    async register(userName: string, password: string): Promise<user> {
+        const isUserValid = await this.prismaService.user.findUnique({
+            where: { userName },
+        });
 
-        
+        if (isUserValid) {
+            throw new Error('User already exists');
+        }
 
+        const hashedPassword = await bcrypt.hash(password, 10);
 
-        return this.prismaService.user.create({data})
+        const newUser = await this.prismaService.user.create({
+            data: {
+                userName,
+                password: hashedPassword,
+            },
+        });
+
+        return newUser;
     }
 
-    
 }
 
