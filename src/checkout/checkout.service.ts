@@ -40,4 +40,12 @@ export class CheckoutService {
     async deleteData(id: string): Promise<checkout> {
         return this.prismaService.checkout.delete({ where: { id } })
     }
+
+    async checkOut(id:string ,data:{
+         itemName : string,
+         
+
+    }) {
+        
+    }
 }
