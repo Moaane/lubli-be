@@ -7,7 +7,7 @@ import { bcrypt } from "bcrypt";
 export class AuthService {
     constructor(private prismaService: PrismaService) { }
 
-    async login(response: Response, userName: string, password: string): Promise<user> {
+    async login( userName: string, password: string): Promise<user> {
 
         const user = await this.prismaService.user.findUnique({ where: { userName } });
 
@@ -27,6 +27,16 @@ export class AuthService {
         return user;
     }
 
+    async register( id:string ,data :{
+        userName : string,
+        password : string,
+    } ): Promise<user>{
+
+        
+
+
+        return this.prismaService.user.create({data})
+    }
 
     
 }
