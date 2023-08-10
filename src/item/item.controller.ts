@@ -7,8 +7,8 @@ export class ItemController {
     constructor(private itemService: ItemService) { }
 
     @Get()
-    async findAll(): Promise<item[]> {
-        return await this.itemService.findAll()
+    async findAll(isDeleted: number): Promise<item[]> {
+        return await this.itemService.findAll(isDeleted)
     }
 
     @Get(':id')

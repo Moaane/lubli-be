@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { item } from '@prisma/client'
 
@@ -6,8 +6,8 @@ import { item } from '@prisma/client'
 export class ItemService {
     constructor(private prismaService: PrismaService) { }
 
-    async findAll(): Promise<item[]> {
-        return this.prismaService.item.findMany()
+    async findAll(isDeleted: number): Promise<item[]> {
+        return this.prismaService.item.findMany({ where: { isDeleted: 0 } })
     }
 
     async findById(id: string): Promise<item> {
@@ -36,6 +36,10 @@ export class ItemService {
             categoryId: string,
             shopId: string
         }): Promise<item> {
+        if (data.stock === 0) {
+            await this.deleteData(id);
+            throw new NotFoundException('Item deleted due to empty stock.');
+        }
         return this.prismaService.item.update({
             where: { id },
             data,
@@ -43,6 +47,9 @@ export class ItemService {
     }
 
     async deleteData(id: string): Promise<item> {
-        return this.prismaService.item.delete({ where: { id } })
+        return this.prismaService.item.update({
+            where: { id },
+            data: { isDeleted: 1 }
+        })
     }
 }
