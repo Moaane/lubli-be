@@ -7,7 +7,7 @@ export class ItemService {
     constructor(private prismaService: PrismaService) { }
 
     async findAll(isDeleted: number): Promise<item[]> {
-        return this.prismaService.item.findMany({ where: { isDeleted: 0 } })
+        return this.prismaService.item.findMany({ where: { isDeleted: 0 | 1 } })
     }
 
     async findById(id: string): Promise<item> {
